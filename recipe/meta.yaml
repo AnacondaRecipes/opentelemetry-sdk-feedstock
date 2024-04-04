@@ -1,6 +1,6 @@
 {% set name = "opentelemetry-sdk" %}
-{% set version = "1.12.0" %}
-{% set sha256 = "bf37830ca4f93d0910cf109749237c5cb4465e31a54dfad8400011e9822a2a14" %}
+{% set version = "1.23.0" %}
+{% set sha256 = "9ddf60195837b59e72fd2033d6a47e2b59a0f74f0ec37d89387d89e3da8cab7f" %}
 
 package:
   name: {{ name|lower }}
