@@ -19,8 +19,7 @@ requirements:
   host:
     - pip
     - python
-    - setuptools
-    - wheel
+    - hatchling
   run:
     - python
     - opentelemetry-api ==1.12.0
