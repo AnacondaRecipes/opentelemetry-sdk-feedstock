@@ -50,5 +50,10 @@ about:
     it is natively supported by a number of vendors.
 
 extra:
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/48409
+    reason: Dependenccy for microsoft-kiota-abstractions
+    recipe-maintainers:
+      - ianaobi
   recipe-maintainers:
     - mariusvniekerk
