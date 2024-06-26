@@ -54,6 +54,6 @@ extra:
     ref: https://anaconda.zendesk.com/agent/tickets/48409
     reason: Dependenccy for microsoft-kiota-abstractions
     recipe-maintainers:
-    - ianaobi
+      - ianaobi
   recipe-maintainers:
     - mariusvniekerk
