@@ -55,5 +55,6 @@ extra:
     reason: Dependenccy for microsoft-kiota-abstractions
     recipe-maintainers:
       - ianaobi
+      - bkreider
   recipe-maintainers:
     - mariusvniekerk
