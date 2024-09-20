@@ -1,6 +1,5 @@
 {% set name = "opentelemetry-sdk" %}
-{% set version = "1.23.0" %}
-{% set sha256 = "9ddf60195837b59e72fd2033d6a47e2b59a0f74f0ec37d89387d89e3da8cab7f" %}
+{% set version = "1.27.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,23 +7,27 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/opentelemetry_sdk-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: d525017dea0ccce9ba4e0245100ec46ecdc043f2d7b8315d56b19aff0904fa6f
 
 build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
-  skip: true  # [py<38]
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
-    - pip
-    - python
+    - python >=3.8
     - hatchling
+    - pip
   run:
-    - python
-    - opentelemetry-api ==1.23.0
-    - opentelemetry-semantic-conventions ==0.44b0
-    - typing_extensions >=3.7.4
+    - python >=3.8
+    - opentelemetry-api =={{ version }}
+    - opentelemetry-semantic-conventions ==0.47b0
+    - typing-extensions >=3.7.4
+    # - typing_extensions >=3.7.4
+    # - typing_extensions >=3.7.4
+    # - typing_extensions >=3.7.4
+    # - typing_extensions >=3.7.4
 
 test:
   imports:
@@ -36,25 +39,19 @@ test:
     - pip
 
 about:
-  summary: OpenTelemetry Python / SDK
-  home: https://github.com/open-telemetry/opentelemetry-python/tree/master/opentelemetry-sdk
+  home: https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-sdk
+  summary: OpenTelemetry Python SDK
   license: Apache-2.0
-  license_family: Apache
   license_file: LICENSE
-  doc_url: https://opentelemetry-python.readthedocs.io
-  dev_url: https://github.com/open-telemetry/opentelemetry-python/tree/master/opentelemetry-sdk
-  description: |-
-    OpenTelemetry, also known as OTel for short, is a vendor-neutral open-source
-    Observability framework for instrumenting, generating, collecting, and exporting
-    telemetry data such as traces, metrics, logs. As an industry-standard
-    it is natively supported by a number of vendors.
 
 extra:
   anaconda-services:
-    ref: https://anaconda.zendesk.com/agent/tickets/48409
-    reason: Dependenccy for microsoft-kiota-abstractions
-    recipe-maintainers:
-      - ianaobi
-      - bkreider
+    ref: https://anaconda.zendesk.com/agent/tickets/49522
+    reason: Dependency for chainlit
   recipe-maintainers:
+    - ianaobi
+  recipe-maintainers:
+    - rxm7706
     - mariusvniekerk
+    - conda-forge/opentelemetry-api
+    - conda-forge/opentelemetry-semantic-conventions
