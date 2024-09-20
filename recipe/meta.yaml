@@ -21,7 +21,8 @@ requirements:
     - pip
   run:
     - python >=3.8
-    - opentelemetry-api =={{ version }}
+#    - opentelemetry-api =={{ version }}
+    - opentelemetry-api 
     - opentelemetry-semantic-conventions ==0.47b0
     - typing-extensions >=3.7.4
     # - typing_extensions >=3.7.4
