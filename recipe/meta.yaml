@@ -47,7 +47,6 @@ about:
 
 
 extra:
-  extra:
   anaconda-services:
     ref: https://anaconda.zendesk.com/agent/tickets/49522
     reason: Dependency for chainlit
