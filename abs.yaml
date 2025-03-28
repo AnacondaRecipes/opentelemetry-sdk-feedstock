@@ -1,7 +1,3 @@
-channels:
-  - https://staging.continuum.io/prefect/fs/opentelemetry-api-feedstock/pr5/e751223
-  - https://staging.continuum.io/prefect/fs/opentelemetry-semantic-conventions-feedstock/pr6/c27cf44
-  
 build_env_vars:
   ANACONDA_ROCKET_ENABLE_PY313 : yes
 
