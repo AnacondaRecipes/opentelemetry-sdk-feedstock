@@ -1,5 +1,5 @@
 {% set name = "opentelemetry-sdk" %}
-{% set version = "1.26.0" %}
+{% set version = "1.30.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/opentelemetry_sdk-{{ version }}.tar.gz
-  sha256: c90d2868f8805619535c05562d699e2f4fb1f00dbd55a86dcefca4da6fa02f85
-  patches:
-    # added to avoid pip._internal.exceptions.MetadataGenerationFailed: metadata generation failed
-    - patches/0000-fix-classifier-clash-in-pyproject.patch
+  sha256: c9287a9e4a7614b9946e933a67168450b9ab35f08797eb9bc77d998fa480fa18
 
 build:
   number: 0
@@ -18,17 +15,14 @@ build:
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
-  build:
-    - patch # [not win]
-    - m2-patch  # [win]
   host:
     - pip
     - python
     - hatchling
   run:
     - python
-    - opentelemetry-api ==1.26.0
-    - opentelemetry-semantic-conventions ==0.47b0
+    - opentelemetry-api ==1.30.0
+    - opentelemetry-semantic-conventions ==0.51b0
     - typing_extensions >=3.7.4
 
 test:
