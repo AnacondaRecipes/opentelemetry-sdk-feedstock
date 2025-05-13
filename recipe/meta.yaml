@@ -1,13 +1,13 @@
 {% set name = "opentelemetry-sdk" %}
-{% set version = "1.27.0" %}
+{% set version = "1.33.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/opentelemetry_sdk-{{ version }}.tar.gz
-  sha256: d525017dea0ccce9ba4e0245100ec46ecdc043f2d7b8315d56b19aff0904fa6f
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/opentelemetry_sdk-{{ version }}.tar.gz
+  sha256: a7fc56d1e07b218fcc316b24d21b59d3f1967b2ca22c217b05da3a26b797cc68
 
 build:
   noarch: python
@@ -16,14 +16,16 @@ build:
 
 requirements:
   host:
-    - python >=3.8
+    - python
     - hatchling
     - pip
   run:
-    - python >=3.8
-    - opentelemetry-api =={{ version }}
-    - opentelemetry-semantic-conventions ==0.48b0
+    - python
+    - typing_extensions >=3.7.4
+    - opentelemetry-api ==1.33.0
+    - opentelemetry-semantic-conventions ==0.54b0
     - typing-extensions >=3.7.4
+    # - typing_extensions >=3.7.4
     # - typing_extensions >=3.7.4
     # - typing_extensions >=3.7.4
     # - typing_extensions >=3.7.4
@@ -36,6 +38,7 @@ test:
   commands:
     - pip check
   requires:
+    - python
     - pip
 
 about:
@@ -43,13 +46,11 @@ about:
   summary: OpenTelemetry Python SDK
   license: Apache-2.0
   license_file: LICENSE
-  dev_url: https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-sdk
-
 
 extra:
   anaconda-services:
-    ref: https://anaconda.zendesk.com/agent/tickets/49522
-    reason: Dependency for chainlit
+    ref: https://anaconda.zendesk.com/agent/tickets/70829
+    reason: Dependency for chromadb
   recipe-maintainers:
     - ianaobi
   recipe-maintainers:
