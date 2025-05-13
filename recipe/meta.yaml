@@ -22,8 +22,8 @@ requirements:
   run:
     - python
     - typing_extensions >=3.7.4
-    - opentelemetry-api ==1.31.0
-    - opentelemetry-semantic-conventions ==0.52b0
+    - opentelemetry-api
+    - opentelemetry-semantic-conventions
     - typing-extensions >=3.7.4
     # - typing_extensions >=3.7.4
     # - typing_extensions >=3.7.4
