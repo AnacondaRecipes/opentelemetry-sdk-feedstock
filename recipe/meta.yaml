@@ -1,18 +1,18 @@
 {% set name = "opentelemetry-sdk" %}
-{% set version = "1.30.0" %}
+{% set version = "1.37.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/opentelemetry_sdk-{{ version }}.tar.gz
-  sha256: c9287a9e4a7614b9946e933a67168450b9ab35f08797eb9bc77d998fa480fa18
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
+  sha256: cc8e089c10953ded765b5ab5669b198bbe0af1b3f89f1007d19acd32dc46dda5
 
 build:
   number: 0
-  skip: true  # [py<38]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true  # [py<39]
 
 requirements:
   host:
@@ -21,18 +21,35 @@ requirements:
     - hatchling
   run:
     - python
-    - opentelemetry-api ==1.30.0
-    - opentelemetry-semantic-conventions ==0.51b0
-    - typing_extensions >=3.7.4
+    - opentelemetry-api =={{ version }}
+    - opentelemetry-semantic-conventions ==0.58b0
+    - typing_extensions >=4.5.0
+
+# E   ModuleNotFoundError: No module named 'opentelemetry.test'
+# https://pypi.org/project/opentelemetry-test-utils, not in the main channel.
+{% set ignore_tests = " --ignore=tests/metrics/exponential_histogram/test_exponent_mapping.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/metrics/exponential_histogram/test_exponential_bucket_histogram_aggregation.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/metrics/integration_test/test_console_exporter.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/metrics/integration_test/test_exporter_concurrency.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_backward_compat.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_import.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_metric_reader_storage.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_metrics.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_periodic_exporting_metric_reader.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/trace/test_trace.py" %}
 
 test:
+  source_files:
+    - tests
   imports:
     - opentelemetry.sdk
     - opentelemetry.sdk.resources
   commands:
     - pip check
+    - pytest -v tests {{ ignore_tests }}
   requires:
     - pip
+    - pytest >=7.4.4
 
 about:
   summary: OpenTelemetry Python / SDK
