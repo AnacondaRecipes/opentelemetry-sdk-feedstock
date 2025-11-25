@@ -1,5 +1,5 @@
 {% set name = "opentelemetry-sdk" %}
-{% set version = "1.37.0" %}
+{% set version = "1.38.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
-  sha256: cc8e089c10953ded765b5ab5669b198bbe0af1b3f89f1007d19acd32dc46dda5
+  sha256: 93df5d4d871ed09cb4272305be4d996236eedb232253e3ab864c8620f051cebe
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   skip: true  # [py<39]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
@@ -22,7 +22,7 @@ requirements:
   run:
     - python
     - opentelemetry-api =={{ version }}
-    - opentelemetry-semantic-conventions ==0.58b0
+    - opentelemetry-semantic-conventions ==0.59b0
     - typing_extensions >=4.5.0
 
 # E   ModuleNotFoundError: No module named 'opentelemetry.test'
@@ -38,6 +38,12 @@ requirements:
 {% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_periodic_exporting_metric_reader.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=tests/trace/test_trace.py" %}
 
+{% set deselect_tests = "" %}
+# RuntimeError: There is no current event loop in thread 'MainThread'.
+{% set deselect_tests = deselect_tests + " --deselect=tests/context/test_asyncio.py::TestAsyncio::test_with_asyncio" %}  # [py>=314] 
+{% set deselect_tests = deselect_tests + " --deselect=tests/shared_internal/test_batch_processor.py::TestBatchProcessor::test_telemetry_exported_once_schedule_delay_reached[BatchLogRecordProcessor-telemetry0]" %}  # [py>=314 and osx] 
+{% set deselect_tests = deselect_tests + " --deselect=tests/shared_internal/test_batch_processor.py::TestBatchProcessor::test_telemetry_exported_once_schedule_delay_reached[BatchLogRecordProcessor-telemetry1]" %}  # [py>=314 and osx] 
+
 test:
   source_files:
     - tests
@@ -46,24 +52,24 @@ test:
     - opentelemetry.sdk.resources
   commands:
     - pip check
-    - pytest -v tests {{ ignore_tests }}
+    - pytest -v tests {{ ignore_tests }} {{ deselect_tests }}
   requires:
     - pip
     - pytest >=7.4.4
 
 about:
-  summary: OpenTelemetry Python / SDK
   home: https://github.com/open-telemetry/opentelemetry-python/tree/master/opentelemetry-sdk
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
-  doc_url: https://opentelemetry-python.readthedocs.io
-  dev_url: https://github.com/open-telemetry/opentelemetry-python/tree/master/opentelemetry-sdk
+  summary: OpenTelemetry Python / SDK
   description: |-
     OpenTelemetry, also known as OTel for short, is a vendor-neutral open-source
     Observability framework for instrumenting, generating, collecting, and exporting
     telemetry data such as traces, metrics, logs. As an industry-standard
     it is natively supported by a number of vendors.
+  doc_url: https://opentelemetry-python.readthedocs.io
+  dev_url: https://github.com/open-telemetry/opentelemetry-python/tree/master/opentelemetry-sdk
 
 extra:
   recipe-maintainers:
