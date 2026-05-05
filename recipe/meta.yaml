@@ -27,7 +27,8 @@ requirements:
 
 # E   ModuleNotFoundError: No module named 'opentelemetry.test'
 # https://pypi.org/project/opentelemetry-test-utils, not in the main channel.
-{% set ignore_tests = " --ignore=tests/metrics/exponential_histogram/test_exponent_mapping.py" %}
+{% set ignore_tests = " --ignore=tests/test_configurator.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/metrics/exponential_histogram/test_exponent_mapping.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=tests/metrics/exponential_histogram/test_exponential_bucket_histogram_aggregation.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=tests/metrics/integration_test/test_console_exporter.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=tests/metrics/integration_test/test_exporter_concurrency.py" %}
