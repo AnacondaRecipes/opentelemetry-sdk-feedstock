@@ -1,5 +1,5 @@
 {% set name = "opentelemetry-sdk" %}
-{% set version = "1.38.0" %}
+{% set version = "1.40.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
-  sha256: 93df5d4d871ed09cb4272305be4d996236eedb232253e3ab864c8620f051cebe
+  sha256: 18e9f5ec20d859d268c7cb3c5198c8d105d073714db3de50b593b8c1345a48f2
 
 build:
   number: 0
@@ -22,7 +22,7 @@ requirements:
   run:
     - python
     - opentelemetry-api =={{ version }}
-    - opentelemetry-semantic-conventions ==0.59b0
+    - opentelemetry-semantic-conventions ==0.61b0
     - typing_extensions >=4.5.0
 
 # E   ModuleNotFoundError: No module named 'opentelemetry.test'
@@ -58,7 +58,7 @@ test:
     - pytest >=7.4.4
 
 about:
-  home: https://github.com/open-telemetry/opentelemetry-python/tree/master/opentelemetry-sdk
+  home: https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-sdk
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
@@ -69,7 +69,7 @@ about:
     telemetry data such as traces, metrics, logs. As an industry-standard
     it is natively supported by a number of vendors.
   doc_url: https://opentelemetry-python.readthedocs.io
-  dev_url: https://github.com/open-telemetry/opentelemetry-python/tree/master/opentelemetry-sdk
+  dev_url: https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-sdk
 
 extra:
   recipe-maintainers:
