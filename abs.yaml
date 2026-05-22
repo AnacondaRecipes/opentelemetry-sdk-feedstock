@@ -1,5 +1,2 @@
 upload_channels:
   - sfe1ed40
-
-channels:
-  - https://staging.continuum.io/pbp/fs/opentelemetry-semantic-conventions-feedstock/pr10/432c9d2
