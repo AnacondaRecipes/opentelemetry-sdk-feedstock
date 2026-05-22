@@ -1,7 +1,5 @@
-aggregate_check: false
 upload_channels:
   - sfe1ed40
-  - services
+
 channels:
-  - sfe1ed40
-  - services
+  - https://staging.continuum.io/pbp/fs/opentelemetry-semantic-conventions-feedstock/pr10/432c9d2
