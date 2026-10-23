@@ -25,8 +25,6 @@ requirements:
     - opentelemetry-semantic-conventions ==0.66b1
     - typing_extensions >=4.5.0
   run_constrained:
-    - pyyaml >=6.0.0
-    - jsonschema >=4.0
     # file-configuration extra; opentelemetry-configuration is not in the channel yet
     - opentelemetry-configuration ==0.66b1
 
