@@ -1,5 +1,5 @@
 {% set name = "opentelemetry-sdk" %}
-{% set version = "1.45.1" %}
+{% set version = "1.43.0" %}
 
 package:
   name: {{ name }}
