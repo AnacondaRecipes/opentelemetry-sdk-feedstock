@@ -31,8 +31,8 @@ requirements:
     - opentelemetry-semantic-conventions ==0.66b1
     - typing_extensions >=4.5.0
   run_constrained:
-    # file-configuration extra; opentelemetry-configuration is not in the channel yet
-    - opentelemetry-configuration ==0.66b1
+    - pyyaml >=6.0.0
+    - jsonschema >=4.0
 
 # E   ModuleNotFoundError: No module named 'opentelemetry.test'
 # https://pypi.org/project/opentelemetry-test-utils, not in the main channel.
@@ -43,7 +43,6 @@ requirements:
 {% set ignore_tests = ignore_tests + " --ignore=tests/metrics/integration_test/test_exporter_concurrency.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_backward_compat.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_import.py" %}
-{% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_exemplarreservoir.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_metric_reader_storage.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_metrics.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=tests/metrics/test_periodic_exporting_metric_reader.py" %}
@@ -52,8 +51,8 @@ requirements:
 {% set deselect_tests = "" %}
 # RuntimeError: There is no current event loop in thread 'MainThread'.
 {% set deselect_tests = deselect_tests + " --deselect=tests/context/test_asyncio.py::TestAsyncio::test_with_asyncio" %}  # [py>=314] 
-# prefix (no [params]) so conda-build selector parsing keeps the pytest line
-{% set deselect_tests = deselect_tests + " --deselect=tests/shared_internal/test_batch_processor.py::TestBatchProcessor::test_telemetry_exported_once_schedule_delay_reached" %}  # [py>=314 and osx]
+{% set deselect_tests = deselect_tests + " --deselect=tests/shared_internal/test_batch_processor.py::TestBatchProcessor::test_telemetry_exported_once_schedule_delay_reached[BatchLogRecordProcessor-telemetry0]" %}  # [py>=314 and osx]
+{% set deselect_tests = deselect_tests + " --deselect=tests/shared_internal/test_batch_processor.py::TestBatchProcessor::test_telemetry_exported_once_schedule_delay_reached[BatchLogRecordProcessor-telemetry1]" %}  # [py>=314 and osx]
 
 test:
   source_files:
