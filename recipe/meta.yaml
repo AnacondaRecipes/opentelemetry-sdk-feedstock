@@ -1,5 +1,5 @@
 {% set name = "opentelemetry-sdk" %}
-{% set version = "1.45.1" %}
+{% set version = "1.45.2" %}
 
 package:
   name: {{ name }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
-  sha256: 63d24a6ca645019a631e6a51999c73e93adcac1196ca640b8ae78a7cc4762bf3
+  sha256: 7eec4de13dd21ff3a1670dcb0e02079e692736f94d733dfdce5af461d884248d
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation  # [not win]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --no-compile  # [win]
   skip: true  # [py<310]
@@ -28,11 +28,11 @@ requirements:
   run:
     - python
     - opentelemetry-api =={{ version }}
-    - opentelemetry-semantic-conventions ==0.66b1
+    - opentelemetry-semantic-conventions ==0.66b2
     - typing_extensions >=4.5.0
   run_constrained:
     # file-configuration extra; opentelemetry-configuration is not in the channel yet
-    - opentelemetry-configuration ==0.66b1
+    - opentelemetry-configuration ==0.66b2
 
 # E   ModuleNotFoundError: No module named 'opentelemetry.test'
 # https://pypi.org/project/opentelemetry-test-utils, not in the main channel.
